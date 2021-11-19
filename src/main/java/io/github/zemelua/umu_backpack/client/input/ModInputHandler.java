@@ -1,5 +1,7 @@
 package io.github.zemelua.umu_backpack.client.input;
 
+import io.github.zemelua.umu_backpack.network.BackpackOpenMessage;
+import io.github.zemelua.umu_backpack.network.ModNetworkHandler;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -15,6 +17,7 @@ public final class ModInputHandler {
 		ClientRegistry.registerKeyBinding(KEY_BIND_BACKPACK);
 	}
 
+	@SuppressWarnings("InstantiationOfUtilityClass")
 	public static void onClientTick(final TickEvent.ClientTickEvent event) {
 		Minecraft minecraft = Minecraft.getInstance();
 		LocalPlayer player = minecraft.player;
@@ -22,6 +25,8 @@ public final class ModInputHandler {
 		if (event.phase == TickEvent.Phase.START) {
 			while (KEY_BIND_BACKPACK.consumeClick()) {
 				if (player == null) break;
+
+				ModNetworkHandler.CHANNEL.sendToServer(new BackpackOpenMessage());
 			}
 		}
 	}

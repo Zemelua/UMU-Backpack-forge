@@ -29,7 +29,7 @@ public class BackpackScreen extends AbstractContainerScreen<BackpackContainer> {
 	protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-		RenderSystem.setShaderTexture(0, switch (this.getMenu().getCapacity()) {
+		RenderSystem.setShaderTexture(0, switch (this.getMenu().getCapacity() - 1) {
 			case 0 -> BackpackScreen.BACKPACK_GUI_TEXTURE_0;
 			case 1 -> BackpackScreen.BACKPACK_GUI_TEXTURE_1;
 			case 2 -> BackpackScreen.BACKPACK_GUI_TEXTURE_2;

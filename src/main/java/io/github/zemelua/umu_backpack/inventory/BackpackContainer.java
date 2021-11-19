@@ -1,12 +1,14 @@
 package io.github.zemelua.umu_backpack.inventory;
 
 import io.github.zemelua.umu_backpack.capability.BackpackCapabilityProvider;
+import io.github.zemelua.umu_backpack.enchantment.ModEnchantments;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -18,7 +20,8 @@ public class BackpackContainer extends AbstractContainerMenu {
 	}
 
 	public BackpackContainer(int id, Inventory playerInventory, ItemStack backpackStack) {
-		this(id, playerInventory, BackpackCapabilityProvider.getInventory(backpackStack), 0);
+		this(id, playerInventory, BackpackCapabilityProvider.getInventory(backpackStack),
+				EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.CRAM.get(), backpackStack) + 1);
 	}
 
 	public BackpackContainer(int id, Inventory playerInventory, IItemHandler backpackInventory, int capacity) {
