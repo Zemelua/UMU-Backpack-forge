@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public final class ModItems {
 	private static final DeferredRegister<Item> REGISTRY = UMUBackpack.registry(ForgeRegistries.ITEMS);
 
-	public static final RegistryObject<Item> BACKPACK = REGISTRY.register(UMUBackpack.MOD_ID, ()
+	public static final RegistryObject<Item> BACKPACK = REGISTRY.register("backpack", ()
 			-> new BackpackItem(ArmorMaterials.LEATHER, EquipmentSlot.CHEST, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS))
 	);
 

@@ -11,7 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public final class ModContainers {
 	private static final DeferredRegister<MenuType<?>> REGISTRY = UMUBackpack.registry(ForgeRegistries.CONTAINERS);
 
-	public static final RegistryObject<MenuType<BackpackContainer>> BACKPACK = REGISTRY.register(UMUBackpack.MOD_ID, ()
+	public static final RegistryObject<MenuType<BackpackContainer>> BACKPACK = REGISTRY.register("backpack", ()
 			-> IForgeContainerType.create(BackpackContainer::new)
 	);
 
