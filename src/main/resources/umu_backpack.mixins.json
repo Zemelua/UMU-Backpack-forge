@@ -5,6 +5,7 @@
 	"compatibilityLevel": "JAVA_8",
 	"refmap": "umu_backpack.refmap.json",
 	"mixins": [
+		"MixinInventoryMenu"
 	],
 	"client": [
 	],

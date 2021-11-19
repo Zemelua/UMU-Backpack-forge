@@ -2,6 +2,7 @@ package io.github.zemelua.umu_backpack;
 
 import io.github.zemelua.umu_backpack.client.ModClientHandler;
 import io.github.zemelua.umu_backpack.inventory.ModContainers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -27,6 +28,10 @@ public class UMUBackpack {
 		ModContainers.initialize(forgeBus, modBus);
 
 		new ModClientHandler(forgeBus, modBus).initialize();
+	}
+
+	public static ResourceLocation location(String path) {
+		return new ResourceLocation(MOD_ID, path);
 	}
 
 	public static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> registry(IForgeRegistry<T> type) {

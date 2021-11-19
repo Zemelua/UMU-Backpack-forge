@@ -1,5 +1,6 @@
 package io.github.zemelua.umu_backpack.client.model.item;
 
+import io.github.zemelua.umu_backpack.UMUBackpack;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -7,6 +8,9 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.LivingEntity;
 
 public class BackpackModel extends HumanoidModel<LivingEntity> {
+	public static final String BACKPACK_TEXTURE = UMUBackpack.location("textures/models/armor/backpack.png").toString();
+	public static final String BACKPACK_OVERLAY_TEXTURE = UMUBackpack.location("textures/models/armor/backpack_overlay.png").toString();
+
 	public BackpackModel(ModelPart root) {
 		super(root);
 	}
