@@ -25,7 +25,7 @@ public class BackpackContainer extends AbstractContainerMenu {
 	}
 
 	public BackpackContainer(int id, Inventory playerInventory, IItemHandler backpackInventory, int capacity) {
-		super(null, id);
+		super(ModContainers.BACKPACK.get(), id);
 
 		this.capacity = capacity;
 

@@ -2,8 +2,12 @@ package io.github.zemelua.umu_backpack.client;
 
 import io.github.zemelua.umu_backpack.client.gui.BackpackScreen;
 import io.github.zemelua.umu_backpack.client.input.ModInputHandler;
+import io.github.zemelua.umu_backpack.client.model.ModModelLayers;
 import io.github.zemelua.umu_backpack.inventory.ModContainers;
+import io.github.zemelua.umu_backpack.item.ModItems;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.world.item.DyeableArmorItem;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -25,6 +29,8 @@ public class ModClientHandler {
 		if (initialized) throw new IllegalStateException("Client is already initialized!");
 
 		this.modBus.addListener(ModClientHandler::onFMLClientSetup);
+		this.modBus.addListener(ModClientHandler::onColorHandlerItem);
+		this.modBus.addListener(ModModelLayers::onRegisterLayerDefinitions);
 		this.modBus.addListener(ModInputHandler::onFMLClientSetup);
 		this.forgeBus.addListener(ModInputHandler::onClientTick);
 
@@ -33,5 +39,12 @@ public class ModClientHandler {
 
 	private static void onFMLClientSetup(final FMLClientSetupEvent event) {
 		MenuScreens.register(ModContainers.BACKPACK.get(), BackpackScreen::new);
+	}
+
+	private static void onColorHandlerItem(final ColorHandlerEvent.Item event) {
+		event.getItemColors().register(
+				(itemStack, color) -> color > 0 ? -1 : ((DyeableArmorItem) itemStack.getItem()).getColor(itemStack),
+				ModItems.BACKPACK.get()
+		);
 	}
 }

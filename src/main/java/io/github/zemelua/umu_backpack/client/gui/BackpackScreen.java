@@ -22,6 +22,13 @@ public class BackpackScreen extends AbstractContainerScreen<BackpackContainer> {
 		super(container, playerInventory, title);
 
 		this.imageHeight = 114 + this.getMenu().getCapacity() * 18;
+		this.inventoryLabelY = this.imageHeight - 94;
+	}
+
+	public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+		this.renderBackground(matrixStack);
+		super.render(matrixStack, mouseX, mouseY, partialTicks);
+		this.renderTooltip(matrixStack, mouseX, mouseY);
 	}
 
 	@SuppressWarnings("DuplicateBranchesInSwitch")

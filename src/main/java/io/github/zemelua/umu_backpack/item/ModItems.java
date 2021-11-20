@@ -1,14 +1,20 @@
 package io.github.zemelua.umu_backpack.item;
 
 import io.github.zemelua.umu_backpack.UMUBackpack;
+import io.github.zemelua.umu_backpack.enchantment.ModEnchantments;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public final class ModItems {
 	private static final DeferredRegister<Item> REGISTRY = UMUBackpack.registry(ForgeRegistries.ITEMS);
@@ -25,7 +31,21 @@ public final class ModItems {
 		if (initialized) throw new IllegalStateException("Items is already initialized!");
 
 		REGISTRY.register(modBus);
+		modBus.addListener(ModItems::onFMLClientSetup);
+		forgeBus.addListener(BackpackItem::onLivingDeath);
 
 		initialized = true;
+	}
+
+	private static void onFMLClientSetup(final FMLClientSetupEvent event) {
+		event.enqueueWork(
+				() -> {
+					CreativeModeTab.TAB_TOOLS.setEnchantmentCategories(Stream.concat(
+							Arrays.stream(CreativeModeTab.TAB_TOOLS.getEnchantmentCategories()),
+							Stream.of(ModEnchantments.Categories.BACKPACK)
+							).toArray(EnchantmentCategory[]::new)
+					);
+				}
+		);
 	}
 }

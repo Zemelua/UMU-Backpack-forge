@@ -15,17 +15,17 @@ public class BackpackModel extends HumanoidModel<LivingEntity> {
 		super(root);
 	}
 
-	public static LayerDefinition createMesh(float size) {
-		MeshDefinition meshDefinition = new MeshDefinition();
+	public static LayerDefinition createLayer() {
+		MeshDefinition meshDefinition = HumanoidModel.createMesh(new CubeDeformation(0.0F), 1.0F);
 		PartDefinition partDefinition = meshDefinition.getRoot();
 
-		partDefinition.addOrReplaceChild("backpack", CubeListBuilder.create()
+		partDefinition.getChild("body").addOrReplaceChild("backpack", CubeListBuilder.create()
 						.texOffs(0, 0).addBox(-4.0F, 0.0F, 2.0F, 8.0F, 10.0F, 4.0F)
 						.texOffs(0, 14).addBox(-3.0F, 4.0F, 6.0F, 6.0F, 6.0F, 2.0F)
 						.texOffs(24, 0).addBox("straps", -4.0F, -0.05F, -3.0F, 8.0F, 8.0F, 5.0F),
 				PartPose.offset(0.0F, 0.0F, 0.0F)
 		);
 
-		return LayerDefinition.create(meshDefinition, 64, 64);
+		return LayerDefinition.create(meshDefinition, 64, 32);
 	}
 }
