@@ -3,14 +3,14 @@ package io.github.zemelua.umu_backpack.client.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.zemelua.umu_backpack.UMUBackpack;
-import io.github.zemelua.umu_backpack.inventory.BackpackContainer;
+import io.github.zemelua.umu_backpack.inventory.BackpackMenu;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class BackpackScreen extends AbstractContainerScreen<BackpackContainer> {
+public class BackpackScreen extends AbstractContainerScreen<BackpackMenu> {
 	private static final ResourceLocation BACKPACK_GUI_TEXTURE_0 = new ResourceLocation(UMUBackpack.MOD_ID, "textures/gui/backpack_0.png");
 	private static final ResourceLocation BACKPACK_GUI_TEXTURE_1 = new ResourceLocation(UMUBackpack.MOD_ID, "textures/gui/backpack_1.png");
 	private static final ResourceLocation BACKPACK_GUI_TEXTURE_2 = new ResourceLocation(UMUBackpack.MOD_ID, "textures/gui/backpack_2.png");
@@ -18,7 +18,7 @@ public class BackpackScreen extends AbstractContainerScreen<BackpackContainer> {
 	private static final ResourceLocation BACKPACK_GUI_TEXTURE_4 = new ResourceLocation(UMUBackpack.MOD_ID, "textures/gui/backpack_4.png");
 	private static final ResourceLocation BACKPACK_GUI_TEXTURE_5 = new ResourceLocation(UMUBackpack.MOD_ID, "textures/gui/backpack_5.png");
 
-	public BackpackScreen(BackpackContainer container, Inventory playerInventory, Component title) {
+	public BackpackScreen(BackpackMenu container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 
 		this.imageHeight = 114 + this.getMenu().getCapacity() * 18;
@@ -31,7 +31,6 @@ public class BackpackScreen extends AbstractContainerScreen<BackpackContainer> {
 		this.renderTooltip(matrixStack, mouseX, mouseY);
 	}
 
-	@SuppressWarnings("DuplicateBranchesInSwitch")
 	@Override
 	protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -43,7 +42,7 @@ public class BackpackScreen extends AbstractContainerScreen<BackpackContainer> {
 			case 3 -> BackpackScreen.BACKPACK_GUI_TEXTURE_3;
 			case 4 -> BackpackScreen.BACKPACK_GUI_TEXTURE_4;
 			case 5 -> BackpackScreen.BACKPACK_GUI_TEXTURE_5;
-			default -> BackpackScreen.BACKPACK_GUI_TEXTURE_0;
+			default -> throw new IllegalStateException("Unexpected value!");
 		});
 		int drawX = (this.width - this.imageWidth) / 2;
 		int drawY = (this.height - this.imageHeight) / 2;

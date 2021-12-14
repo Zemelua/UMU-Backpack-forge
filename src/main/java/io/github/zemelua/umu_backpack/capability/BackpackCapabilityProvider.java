@@ -1,6 +1,5 @@
 package io.github.zemelua.umu_backpack.capability;
 
-import io.github.zemelua.umu_backpack.item.ModItems;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -10,9 +9,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class BackpackCapabilityProvider implements ICapabilitySerializable<CompoundTag> {
 	private final ItemStackHandler inventory = new ItemStackHandler(54);
@@ -35,7 +34,7 @@ public class BackpackCapabilityProvider implements ICapabilitySerializable<Compo
 	}
 
 	public static IItemHandler getInventory(ItemStack backpackStack) {
-		if (!backpackStack.is(ModItems.BACKPACK.get())) throw new IllegalArgumentException("The item stack isn't backpack!");
+		// if (!backpackStack.is(ModItems.BACKPACK.get())) throw new IllegalArgumentException("The item stack isn't backpack!");
 
 		return backpackStack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElseThrow(
 				() -> new IllegalStateException("Item handler capability doesn't exist...")

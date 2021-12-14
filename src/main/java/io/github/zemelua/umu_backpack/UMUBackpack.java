@@ -2,8 +2,7 @@ package io.github.zemelua.umu_backpack;
 
 import io.github.zemelua.umu_backpack.client.ModClientHandler;
 import io.github.zemelua.umu_backpack.enchantment.ModEnchantments;
-import io.github.zemelua.umu_backpack.fix.FixedInventoryMenu;
-import io.github.zemelua.umu_backpack.inventory.ModContainers;
+import io.github.zemelua.umu_backpack.inventory.ModMenus;
 import io.github.zemelua.umu_backpack.item.ModItems;
 import io.github.zemelua.umu_backpack.network.ModNetworkHandler;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +20,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
-@SuppressWarnings("unused")
 @Mod(UMUBackpack.MOD_ID)
 public class UMUBackpack {
 	public static final String MOD_ID = "umu_backpack";
@@ -34,10 +32,8 @@ public class UMUBackpack {
 
 		ModItems.initialize(forgeBus, modBus);
 		ModEnchantments.initialize(forgeBus, modBus);
-		ModContainers.initialize(forgeBus, modBus);
+		ModMenus.initialize(forgeBus, modBus);
 		ModNetworkHandler.initialize();
-
-		forgeBus.addListener(FixedInventoryMenu::onPlayerTick);
 
 		ModClientHandler clientHandler = new ModClientHandler(forgeBus, modBus);
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> clientHandler::initialize);

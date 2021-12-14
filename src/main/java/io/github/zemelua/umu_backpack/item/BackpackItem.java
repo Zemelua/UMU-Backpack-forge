@@ -32,7 +32,7 @@ public class BackpackItem extends DyeableArmorItem {
 
 	@Override
 	public void onDestroyed(ItemEntity itemEntity) {
-		ItemUtils.onContainerDestroyed(itemEntity, getContents(itemEntity.getItem()).stream());
+		ItemUtils.onContainerDestroyed(itemEntity, BackpackItem.getContents(itemEntity.getItem()).stream());
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class BackpackItem extends DyeableArmorItem {
 		if (!entity.level.isClientSide()) {
 			if (itemStack.getMaxDamage() - itemStack.getDamageValue() - amount > 0) return amount;
 
-			Containers.dropContents(entity.level, entity.blockPosition(), getContents(itemStack));
+			Containers.dropContents(entity.level, entity.blockPosition(), BackpackItem.getContents(itemStack));
 		}
 
 		return super.damageItem(itemStack, amount, entity, onBroken);
@@ -52,24 +52,22 @@ public class BackpackItem extends DyeableArmorItem {
 		return new BackpackCapabilityProvider();
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	@Nullable
 	@Override
+	@SuppressWarnings("ConstantConditions")
 	public String getArmorTexture(ItemStack itemStack, Entity entity, EquipmentSlot slot, String type) {
-		return type != null && type.equals("overlay") ? BackpackModel.BACKPACK_OVERLAY_TEXTURE : BackpackModel.BACKPACK_TEXTURE;
+		return type != null && type.equals("overlay") ? BackpackModel.OVERLAY_TEXTURE : BackpackModel.BASE_TEXTURE;
 	}
 
 	@Override
 	public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-		consumer.accept(
-				new IItemRenderProperties() {
-					@SuppressWarnings("unchecked")
-					@Override
-					public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-						return (A) new BackpackModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModModelLayers.BACKPACK));
-					}
-				}
-		);
+		consumer.accept(new IItemRenderProperties() {
+			@Override
+			@SuppressWarnings("unchecked")
+			public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
+				return (A) new BackpackModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModModelLayers.BACKPACK));
+			}
+		});
 	}
 
 	public static NonNullList<ItemStack> getContents(ItemStack backpackStack) {
@@ -99,6 +97,6 @@ public class BackpackItem extends DyeableArmorItem {
 		if (living instanceof Player player && player.getAbilities().instabuild) return;
 		if (!itemStack.is(ModItems.BACKPACK.get())) return;
 
-		Containers.dropContents(living.level, living.blockPosition(), getContents(itemStack));
+		Containers.dropContents(living.level, living.blockPosition(), BackpackItem.getContents(itemStack));
 	}
 }

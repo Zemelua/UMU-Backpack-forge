@@ -1,8 +1,8 @@
 package io.github.zemelua.umu_backpack.network;
 
 import io.github.zemelua.umu_backpack.UMUBackpack;
-import net.minecraftforge.fmllegacy.network.NetworkRegistry;
-import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class ModNetworkHandler {
 	private static final String PROTOCOL_VERSION = "1";

@@ -1,6 +1,6 @@
 package io.github.zemelua.umu_backpack.network;
 
-import io.github.zemelua.umu_backpack.inventory.BackpackContainer;
+import io.github.zemelua.umu_backpack.inventory.BackpackMenu;
 import io.github.zemelua.umu_backpack.item.ModItems;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -8,8 +8,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.NetworkHooks;
 
 import java.util.function.Supplier;
 
@@ -31,7 +31,7 @@ public class BackpackOpenMessage {
 
 		networkContext.enqueueWork(
 				() -> NetworkHooks.openGui(player, new SimpleMenuProvider(
-						(id, playerInventory, unused) -> new BackpackContainer(
+						(id, playerInventory, unused) -> new BackpackMenu(
 								id, playerInventory, itemStack
 						),
 						new TranslatableComponent("container.umu_backpack.backpack")

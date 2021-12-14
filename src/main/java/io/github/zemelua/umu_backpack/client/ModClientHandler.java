@@ -1,9 +1,9 @@
 package io.github.zemelua.umu_backpack.client;
 
 import io.github.zemelua.umu_backpack.client.gui.BackpackScreen;
-import io.github.zemelua.umu_backpack.client.input.ModInputHandler;
+import io.github.zemelua.umu_backpack.client.item.ModInputManager;
 import io.github.zemelua.umu_backpack.client.model.ModModelLayers;
-import io.github.zemelua.umu_backpack.inventory.ModContainers;
+import io.github.zemelua.umu_backpack.inventory.ModMenus;
 import io.github.zemelua.umu_backpack.item.ModItems;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.DyeableArmorItem;
@@ -31,14 +31,14 @@ public class ModClientHandler {
 		this.modBus.addListener(ModClientHandler::onFMLClientSetup);
 		this.modBus.addListener(ModClientHandler::onColorHandlerItem);
 		this.modBus.addListener(ModModelLayers::onRegisterLayerDefinitions);
-		this.modBus.addListener(ModInputHandler::onFMLClientSetup);
-		this.forgeBus.addListener(ModInputHandler::onClientTick);
+		this.modBus.addListener(ModInputManager::onFMLClientSetup);
+		this.forgeBus.addListener(ModInputManager::onClientTick);
 
 		this.initialized = true;
 	}
 
 	private static void onFMLClientSetup(final FMLClientSetupEvent event) {
-		MenuScreens.register(ModContainers.BACKPACK.get(), BackpackScreen::new);
+		MenuScreens.register(ModMenus.BACKPACK.get(), BackpackScreen::new);
 	}
 
 	private static void onColorHandlerItem(final ColorHandlerEvent.Item event) {

@@ -8,10 +8,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -31,13 +31,13 @@ public final class ModItems {
 		if (initialized) throw new IllegalStateException("Items is already initialized!");
 
 		REGISTRY.register(modBus);
-		modBus.addListener(ModItems::onFMLClientSetup);
+		modBus.addListener(ModItems::onFMLCommonSetup);
 		forgeBus.addListener(BackpackItem::onLivingDeath);
 
 		initialized = true;
 	}
 
-	private static void onFMLClientSetup(final FMLClientSetupEvent event) {
+	private static void onFMLCommonSetup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(
 				() -> {
 					CreativeModeTab.TAB_TOOLS.setEnchantmentCategories(Stream.concat(

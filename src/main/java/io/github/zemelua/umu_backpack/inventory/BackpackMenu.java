@@ -12,20 +12,20 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class BackpackContainer extends AbstractContainerMenu {
+public class BackpackMenu extends AbstractContainerMenu {
 	private final int capacity;
 
-	protected BackpackContainer(int id, Inventory playerInventory, FriendlyByteBuf buffer) {
+	protected BackpackMenu(int id, Inventory playerInventory, FriendlyByteBuf buffer) {
 		this(id, playerInventory, buffer.readItem());
 	}
 
-	public BackpackContainer(int id, Inventory playerInventory, ItemStack backpackStack) {
+	public BackpackMenu(int id, Inventory playerInventory, ItemStack backpackStack) {
 		this(id, playerInventory, BackpackCapabilityProvider.getInventory(backpackStack),
 				EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.CRAM.get(), backpackStack) + 1);
 	}
 
-	public BackpackContainer(int id, Inventory playerInventory, IItemHandler backpackInventory, int capacity) {
-		super(ModContainers.BACKPACK.get(), id);
+	public BackpackMenu(int id, Inventory playerInventory, IItemHandler backpackInventory, int capacity) {
+		super(ModMenus.BACKPACK.get(), id);
 
 		this.capacity = capacity;
 
