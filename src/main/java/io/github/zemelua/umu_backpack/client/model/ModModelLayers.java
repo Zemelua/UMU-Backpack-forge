@@ -10,7 +10,7 @@ public final class ModModelLayers {
 
 	@SuppressWarnings("SameParameterValue")
 	private static ModelLayerLocation create(String name) {
-		return new ModelLayerLocation(UMUBackpack.location(name), "main");
+		return new ModelLayerLocation(UMUBackpack.resource(name), "main");
 	}
 
 	public static void onRegisterLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {

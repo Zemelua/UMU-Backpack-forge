@@ -7,7 +7,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 public final class ModNetworkHandler {
 	private static final String PROTOCOL_VERSION = "1";
 	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-			UMUBackpack.location("main"),
+			UMUBackpack.resource("main"),
 			() -> PROTOCOL_VERSION,
 			PROTOCOL_VERSION::equals,
 			PROTOCOL_VERSION::equals

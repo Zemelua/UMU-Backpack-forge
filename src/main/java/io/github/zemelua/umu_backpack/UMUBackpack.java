@@ -1,5 +1,6 @@
 package io.github.zemelua.umu_backpack;
 
+import io.github.zemelua.umu_backpack.advancement.trigger.ModTriggers;
 import io.github.zemelua.umu_backpack.client.ModClientHandler;
 import io.github.zemelua.umu_backpack.enchantment.ModEnchantments;
 import io.github.zemelua.umu_backpack.inventory.ModMenus;
@@ -32,6 +33,7 @@ public class UMUBackpack {
 
 		ModItems.initialize(forgeBus, modBus);
 		ModEnchantments.initialize(forgeBus, modBus);
+		ModTriggers.initialize(forgeBus, modBus);
 		ModMenus.initialize(forgeBus, modBus);
 		ModNetworkHandler.initialize();
 
@@ -39,7 +41,7 @@ public class UMUBackpack {
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> clientHandler::initialize);
 	}
 
-	public static ResourceLocation location(String path) {
+	public static ResourceLocation resource(String path) {
 		return new ResourceLocation(MOD_ID, path);
 	}
 

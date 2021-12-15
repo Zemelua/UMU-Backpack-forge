@@ -8,8 +8,8 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.LivingEntity;
 
 public class BackpackModel extends HumanoidModel<LivingEntity> {
-	public static final String BASE_TEXTURE = UMUBackpack.location("textures/models/armor/backpack.png").toString();
-	public static final String OVERLAY_TEXTURE = UMUBackpack.location("textures/models/armor/backpack_overlay.png").toString();
+	public static final String BASE_TEXTURE = UMUBackpack.resource("textures/models/armor/backpack.png").toString();
+	public static final String OVERLAY_TEXTURE = UMUBackpack.resource("textures/models/armor/backpack_overlay.png").toString();
 
 	public BackpackModel(ModelPart root) {
 		super(root);

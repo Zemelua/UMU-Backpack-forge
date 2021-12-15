@@ -1,7 +1,6 @@
 package io.github.zemelua.umu_backpack.mixin;
 
 import com.mojang.datafixers.util.Pair;
-import io.github.zemelua.umu_backpack.UMUBackpack;
 import io.github.zemelua.umu_backpack.item.BackpackItem;
 import io.github.zemelua.umu_backpack.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
@@ -47,13 +46,13 @@ public abstract class InventoryMenuMixin extends RecipeBookMenu<CraftingContaine
 			@Override
 			public boolean mayPickup(Player player) {
 				ItemStack itemStack = this.getItem();
-
-				UMUBackpack.LOGGER.info(BackpackItem.isEmpty(itemStack));
+				if (itemStack.isEmpty()) return true;
+				if (player.isCreative()) return true;
 
 				if (itemStack.is(ModItems.BACKPACK.get()) && !BackpackItem.isEmpty(itemStack)) return false;
 
-				return (itemStack.isEmpty() || player.isCreative() || !EnchantmentHelper.hasBindingCurse(itemStack))
-						&& super.mayPickup(player);
+				return !(EnchantmentHelper.hasBindingCurse(itemStack)
+						|| (itemStack.is(ModItems.BACKPACK.get()) && !BackpackItem.isEmpty(itemStack)));
 			}
 
 			@Override
